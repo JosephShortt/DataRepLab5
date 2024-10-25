@@ -7,6 +7,8 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something went wrong!');
 });
 
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
     res.send('Welcome to Data Respresentation & Querying');
 });
@@ -42,6 +44,12 @@ app.get('/api/movies', (req, res) => {
         }
     ];
     res.status(200).json({ myMovies:movies });
+});
+
+const path = require('path');
+
+app.get('/index', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(port, () => {
