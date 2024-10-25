@@ -9,6 +9,9 @@ app.use((err, req, res, next) => {
 
 app.use(express.static('public'));
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get('/', (req, res) => {
     res.send('Welcome to Data Respresentation & Querying');
 });
@@ -55,6 +58,12 @@ app.get('/index', (req, res) => {
 app.get('/name', (req, res) => {
     const firstname = req.query.firstname;
     const lastname = req.query.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
+});
+
+app.post('/name', (req, res) => {
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
     res.send(`Hello ${firstname} ${lastname}`);
 });
 
